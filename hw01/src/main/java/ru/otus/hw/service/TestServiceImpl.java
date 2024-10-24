@@ -23,7 +23,7 @@ public class TestServiceImpl implements TestService {
         for (int i = 0; i < questions.size(); i++) {
             Question question = questions.get(i);
             ioService.printFormattedLine("%d. %s%n",
-                    questions.indexOf(question) + 1, question.text());
+                    i + 1, question.text());
             writeAnswers(question);
         }
     }

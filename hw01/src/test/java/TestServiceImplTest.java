@@ -18,11 +18,11 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class TestServiceImplTest {
 
-    CsvQuestionDao csvQuestionDao;
+    private CsvQuestionDao csvQuestionDao;
 
-    StreamsIOService ioService;
+    private StreamsIOService ioService;
 
-    TestServiceImpl testService;
+    private TestServiceImpl testService;
 
     @BeforeEach
     public void setUp() {
