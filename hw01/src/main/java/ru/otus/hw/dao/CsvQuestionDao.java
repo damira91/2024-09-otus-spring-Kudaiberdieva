@@ -11,30 +11,33 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class CsvQuestionDao implements QuestionDao {
+
     private final TestFileNameProvider fileNameProvider;
 
     @Override
     public List<Question> findAll() {
         String fileName = fileNameProvider.getTestFileName();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
-             InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName)) {
+
             if (inputStream == null) {
                 throw new QuestionReadException("File not found: " + fileName);
             }
 
-            List<QuestionDto> questionList = new CsvToBeanBuilder<QuestionDto>(reader)
-                    .withType(QuestionDto.class)
-                    .withSkipLines(1)
-                    .withSeparator(';')
-                    .build()
-                    .parse();
-            return questionList.stream()
-                    .map(QuestionDto::toDomainObject)
-                    .toList();
+            try (InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
+                List<QuestionDto> questionList = new CsvToBeanBuilder<QuestionDto>(reader)
+                        .withType(QuestionDto.class)
+                        .withSkipLines(1)
+                        .withSeparator(';')
+                        .build()
+                        .parse();
+                return questionList.stream()
+                        .map(QuestionDto::toDomainObject)
+                        .toList();
+            }
+
         } catch (Exception e) {
             throw new QuestionReadException("Error reading questions from file: " + e.getMessage(), e);
         }

@@ -14,7 +14,6 @@ public class TestServiceImpl implements TestService {
 
     private final CsvQuestionDao csvQuestionDao;
 
-
     @Override
     public void executeTest() {
         ioService.printLine("");
