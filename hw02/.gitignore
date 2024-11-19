@@ -15,6 +15,7 @@ dependency-reduced-pom.xml
 *.iws
 *.iml
 *.ipr
+workspace.xml
 
 ### NetBeans ###
 /nbproject/private/
@@ -23,4 +24,4 @@ dependency-reduced-pom.xml
 /dist/
 /nbdist/
 /.nb-gradle/
-/libraries/
+hw02/libraries/
