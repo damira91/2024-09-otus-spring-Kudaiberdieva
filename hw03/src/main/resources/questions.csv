@@ -1,0 +1,6 @@
+# Добавить сюда своих вопросов. Эту строку надо пропустить при настройке CsvToBean (withSkipLines)
+What is the capital of Great Britain?;London%true|Dublin%false|Vancouver%false
+Who created Linux OS?; Linus Ulmark%false|LinusTorwald%true|Linus Pauling%false
+1 kilobyte is equals to?;1024 Bytes%true|1000 Bytes%false|1200 Bytes%false
+If you restart your computer by switching it off (i.e. power cut), it is known as?;Soft boot%false|Warm boot%false|Cold boot%true
+If you need to paste the contents of MS Word, which command will you give?; A - Ctrl + A%false|B - Ctrl + C%false|C - Ctrl + V%true
