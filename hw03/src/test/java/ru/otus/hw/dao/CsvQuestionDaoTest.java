@@ -6,12 +6,17 @@ import org.junit.jupiter.api.Test;
 import ru.otus.hw.config.TestFileNameProvider;
 import ru.otus.hw.domain.Answer;
 import ru.otus.hw.domain.Question;
+import ru.otus.hw.exceptions.QuestionReadException;
 
-import java.util.*;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 public class CsvQuestionDaoTest {
 
@@ -40,5 +45,13 @@ public class CsvQuestionDaoTest {
         Answer firstAnswer = firstQuestion.answers().get(0);
         assertEquals("London", firstAnswer.text());
         assertTrue(firstAnswer.isCorrect(), "The first answer should be correct");
+    }
+    @Test
+    @DisplayName("Should throw exception when unable to parse CSV file")
+    public void shouldThrowExceptionWhenUnableToParseCsv() {
+        var invalidFileName = "invalid-questions.csv";
+        given(testFileNameProvider.getTestFileName()).willReturn(invalidFileName);
+        assertThrows(QuestionReadException.class, () -> csvQuestionDao.findAll());
+
     }
 }

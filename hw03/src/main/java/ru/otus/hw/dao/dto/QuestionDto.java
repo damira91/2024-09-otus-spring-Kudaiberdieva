@@ -2,12 +2,14 @@ package ru.otus.hw.dao.dto;
 
 import com.opencsv.bean.CsvBindAndSplitByPosition;
 import com.opencsv.bean.CsvBindByPosition;
+import lombok.Data;
 import ru.otus.hw.domain.Answer;
 import ru.otus.hw.domain.Question;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class QuestionDto {
 
     @CsvBindByPosition(position = 0)

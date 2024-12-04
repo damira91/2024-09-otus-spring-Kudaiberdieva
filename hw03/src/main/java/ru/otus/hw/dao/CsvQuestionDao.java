@@ -35,6 +35,9 @@ public class CsvQuestionDao implements QuestionDao {
                         .withSeparator(';')
                         .build()
                         .parse();
+                if (questionList.isEmpty() || questionList.stream().anyMatch(dto -> dto.getText() == null || dto.getAnswers() == null)) {
+                    throw new QuestionReadException("Invalid or empty CSV data in file: " + fileName);
+                }
                 return questionList.stream()
                         .map(QuestionDto::toDomainObject)
                         .toList();
